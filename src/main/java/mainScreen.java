@@ -110,7 +110,7 @@ public class mainScreen {
 				}catch(Exception e){return;}
 				double distance = 0;
 				try{
-					if(!textField_1.getText().isEmpty())
+					if(!textField_2.getText().isEmpty())
 						distance = Double.parseDouble(textField_2.getText());
 				}catch(Exception e){return;}
 				String text = textField.getText();
@@ -181,10 +181,11 @@ public class mainScreen {
 			path = selectedFile.getAbsolutePath();
 
 			System.out.println("Selected file: " + path);
+			
 		}
 
 		textPane_3.setText(path);
-		
+		if(path == null || path.isEmpty()) System.exit(1);
 
 		textField_2 = new JTextField();
 		textField_2.setBounds(63, 114, 230, 20);

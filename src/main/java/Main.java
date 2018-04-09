@@ -18,10 +18,10 @@ public class Main extends PApplet{
 	static float textSize;
 	static float distance;
 
-	public static void main(String[]args){
-		String text ="text on pics";
-		play("pics", text, "Arial", (float)20, 10);
-	}
+	//	public static void main(String[]args){
+	//		String text ="text on pics";
+	//		play("pics", text, "Arial", (float)20, 10);
+	//	}
 
 	static int times;
 	static String folder;
@@ -39,8 +39,8 @@ public class Main extends PApplet{
 			fontName = "Arial";
 
 		if(!text.isEmpty() && distance<0)
-			distance = 15;
-		
+			distance = 0;
+
 		if(!text.isEmpty() && textSize<=0)
 			textSize = 15;
 
@@ -55,7 +55,14 @@ public class Main extends PApplet{
 		if(images.size()%18==0)
 			times--;
 
-		System.out.println(images.size()+" t"+times);
+
+
+		System.out.println("pics: "+images.size()+" rounds: "+times);
+		System.out.println(text);
+		System.out.println("size: "+textSize);
+		System.out.println("font: "+fontName);
+		System.out.println("distance: "+distance);
+
 
 		PApplet.main("Main");
 	}
@@ -114,7 +121,7 @@ public class Main extends PApplet{
 		//		size((int)mm(420),(int)mm(800)); 
 
 		String[] fontList = PFont.list();
-//		System.out.println(Arrays.toString(fontList));
+		//		System.out.println(Arrays.toString(fontList));
 
 		if(textSize>0)
 			myFont = createFont(fontName, textSize);
@@ -168,9 +175,10 @@ public class Main extends PApplet{
 
 		float x=0, y=0;
 		int index=0;
-		for(int i=0; i<3; i++){   
+
+		for(int j=0; j<6; j++){
 			x=0; y=0;
-			for(int j=0; j<6; j++){
+			for(int i=0; i<3; i++){   
 
 				if(index<pdfImages.length && pdfImages[index]!=null && !pdfImages[index].isEmpty())
 					img = loadImage(folder+"//"+pdfImages[index]);
@@ -180,13 +188,11 @@ public class Main extends PApplet{
 				x = (float) (42.5 + i*(95+25));
 				y = (float) (52.5 + j*(95+25));
 
-				//rect(mm(x), mm(y), mm(95), mm(95)); //row 2
 
 				image(img,mm(x), mm(y), mm(95), mm(95));
 
 				fill(255);
-				if((i==0 &&(j==0 || j == 5)) || (i==2 && (j==0 || j==5))) 
-					ellipse(mm(x+(float) 47.5),mm(y+(float) 47.5) ,mm(2),mm(2)); 
+
 
 				//				 textSize(textSize);
 				if(textSize>0){
@@ -197,6 +203,23 @@ public class Main extends PApplet{
 				}
 			}
 		}
+
+		float disx = (float) 21.25;
+		float disy = (float) 26.25;
+
+		ellipse(mm(disx),mm(disy) ,mm(2),mm(2)); 
+		ellipse(mm(420-disx),mm(disy) ,mm(2),mm(2)); 
+		ellipse(mm(disx),mm(800-disy) ,mm(2),mm(2)); 
+		ellipse(mm(420-disx),mm(800-disy) ,mm(2),mm(2)); 
+
+		//rect(30, 20, 55, 55);
+		fill(255,0,0);
+		noStroke();
+		rect(0, 0, mm(10), mm(10));
+		rect(mm(410), 0, mm(10), mm(10));
+		rect(0, mm(790), mm(10), mm(10));
+		rect(mm(410), mm(790), mm(10), mm(10));
+
 
 		endRecord();
 
@@ -215,9 +238,9 @@ public class Main extends PApplet{
 		String[] words = text.split(" ");
 
 		String[] strings = new String[words.length];
-		
+
 		System.out.println(Arrays.toString(words));
-		
+
 		for(int i=0; i<strings.length; i++)strings[i]="";
 
 		boolean ok = false; int index=0;
@@ -235,8 +258,9 @@ public class Main extends PApplet{
 			}
 		}
 
+
 		System.out.println(Arrays.toString(strings));
-		
+
 		for(int i=0; i<strings.length; i++){
 			if(isHebrew(strings[i]))
 				strings[i] = new String(reverse(strings[i].toCharArray()));
@@ -249,6 +273,11 @@ public class Main extends PApplet{
 		return itext;
 	}
 
+	/**
+	 * this function check is the String is in hebrew by search for hebrew letters in it.
+	 * @param s 
+	 * @return true if contains hebrew false otherwise
+	 */
 	public static boolean isHebrew(String s){
 		if(s==null) return false;
 
@@ -263,21 +292,21 @@ public class Main extends PApplet{
 				|| s.contains("è")
 				|| s.contains("é")
 				|| s.contains("ë")
+				|| s.contains("ê")
 				|| s.contains("ì")
 				|| s.contains("î")
+				|| s.contains("í")
 				|| s.contains("ð")
+				|| s.contains("ï")
 				|| s.contains("ñ")
 				|| s.contains("ò")
 				|| s.contains("ô")
+				|| s.contains("ó")
 				|| s.contains("ö")
+				|| s.contains("õ")
 				|| s.contains("÷")
 				|| s.contains("ø")
 				|| s.contains("ù")
-				|| s.contains("ú")
-				|| s.contains("ê")
-				|| s.contains("í")
-				|| s.contains("ï")
-				|| s.contains("ó")
-				|| s.contains("õ");
+				|| s.contains("ú");
 	}
 }

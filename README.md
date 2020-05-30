@@ -1,6 +1,6 @@
 # imagesToPdf
-Builds pdf files with prechoosen images, 
-3*5 square pictures in a page.
+Builds pdf files from selected images, 
+3 X 5 square pictures in a page.
 using Java + Processing
 
 Ben Horn
